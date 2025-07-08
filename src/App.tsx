@@ -131,9 +131,9 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      <div className="flex">
+      <div className="flex relative">
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-3 sm:p-4 lg:p-6 w-full lg:w-auto">
           <div className="max-w-7xl mx-auto">
             {renderMainContent()}
           </div>

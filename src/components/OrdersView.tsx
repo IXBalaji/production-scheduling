@@ -108,112 +108,112 @@ const OrdersView = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Production Orders</h1>
-          <p className="text-gray-600">Manage and track all production orders</p>
+          <p className="text-sm sm:text-base text-gray-600">Manage and track all production orders</p>
         </div>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
+        <button className="bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
           <Plus className="h-4 w-4" />
-          <span>New Order</span>
+          <span className="hidden sm:inline">New Order</span>
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div className="bg-white p-4 rounded-lg border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Total Orders</p>
-              <p className="text-2xl font-bold text-gray-900">{orders.length}</p>
+              <p className="text-xs sm:text-sm text-gray-600">Total Orders</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900">{orders.length}</p>
             </div>
-            <Package className="h-8 w-8 text-blue-500" />
+            <Package className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500" />
           </div>
         </div>
         <div className="bg-white p-4 rounded-lg border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">In Progress</p>
-              <p className="text-2xl font-bold text-blue-600">
+              <p className="text-xs sm:text-sm text-gray-600">In Progress</p>
+              <p className="text-xl sm:text-2xl font-bold text-blue-600">
                 {orders.filter(o => o.status === 'in-progress').length}
               </p>
             </div>
-            <Clock className="h-8 w-8 text-blue-500" />
+            <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500" />
           </div>
         </div>
         <div className="bg-white p-4 rounded-lg border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Completed</p>
-              <p className="text-2xl font-bold text-green-600">
+              <p className="text-xs sm:text-sm text-gray-600">Completed</p>
+              <p className="text-xl sm:text-2xl font-bold text-green-600">
                 {orders.filter(o => o.status === 'completed').length}
               </p>
             </div>
-            <CheckCircle className="h-8 w-8 text-green-500" />
+            <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />
           </div>
         </div>
         <div className="bg-white p-4 rounded-lg border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Delayed</p>
-              <p className="text-2xl font-bold text-red-600">
+              <p className="text-xs sm:text-sm text-gray-600">Delayed</p>
+              <p className="text-xl sm:text-2xl font-bold text-red-600">
                 {orders.filter(o => o.status === 'delayed').length}
               </p>
             </div>
-            <AlertTriangle className="h-8 w-8 text-red-500" />
+            <AlertTriangle className="h-6 w-6 sm:h-8 sm:w-8 text-red-500" />
           </div>
         </div>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-        <div className="p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Order Details</h3>
+        <div className="p-4 sm:p-6">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Order Details</h3>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-gray-200">
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">Order ID</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">Customer</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">Product</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">Quantity</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">Due Date</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">Status</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">Priority</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">Progress</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-600">Value</th>
+                  <th className="text-left py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-600">Order ID</th>
+                  <th className="text-left py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-600 hidden sm:table-cell">Customer</th>
+                  <th className="text-left py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-600">Product</th>
+                  <th className="text-left py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-600 hidden md:table-cell">Quantity</th>
+                  <th className="text-left py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-600 hidden lg:table-cell">Due Date</th>
+                  <th className="text-left py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-600">Status</th>
+                  <th className="text-left py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-600 hidden sm:table-cell">Priority</th>
+                  <th className="text-left py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-600">Progress</th>
+                  <th className="text-left py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-600 hidden lg:table-cell">Value</th>
                 </tr>
               </thead>
               <tbody>
                 {orders.map((order) => (
                   <tr key={order.id} className="border-b border-gray-100 hover:bg-gray-50">
-                    <td className="py-3 px-4">
+                    <td className="py-2 sm:py-3 px-2 sm:px-4">
                       <div className="flex items-center space-x-2">
                         {getStatusIcon(order.status)}
-                        <span className="font-medium">{order.id}</span>
+                        <span className="text-xs sm:text-sm font-medium">{order.id}</span>
                       </div>
                     </td>
-                    <td className="py-3 px-4 text-gray-900">{order.customer}</td>
-                    <td className="py-3 px-4 text-gray-600">{order.product}</td>
-                    <td className="py-3 px-4 text-gray-900">{order.quantity}</td>
-                    <td className="py-3 px-4 text-gray-600">{order.dueDate}</td>
-                    <td className="py-3 px-4">
+                    <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-900 hidden sm:table-cell">{order.customer}</td>
+                    <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-600">{order.product}</td>
+                    <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-900 hidden md:table-cell">{order.quantity}</td>
+                    <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-600 hidden lg:table-cell">{order.dueDate}</td>
+                    <td className="py-2 sm:py-3 px-2 sm:px-4">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
                         {order.status}
                       </span>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="py-2 sm:py-3 px-2 sm:px-4 hidden sm:table-cell">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(order.priority)}`}>
                         {order.priority}
                       </span>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="py-2 sm:py-3 px-2 sm:px-4">
                       <div className="flex items-center space-x-2">
-                        <div className="w-16 bg-gray-200 rounded-full h-2">
+                        <div className="w-12 sm:w-16 bg-gray-200 rounded-full h-2">
                           <div 
                             className="bg-blue-600 h-2 rounded-full"
                             style={{ width: `${order.progress}%` }}
                           ></div>
                         </div>
-                        <span className="text-sm text-gray-600">{order.progress}%</span>
+                        <span className="text-xs text-gray-600">{order.progress}%</span>
                       </div>
                     </td>
-                    <td className="py-3 px-4 font-medium text-gray-900">{order.value}</td>
+                    <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-900 hidden lg:table-cell">{order.value}</td>
                   </tr>
                 ))}
               </tbody>

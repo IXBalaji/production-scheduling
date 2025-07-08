@@ -176,12 +176,12 @@ const SettingsView = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">System Settings</h1>
-        <p className="text-gray-600">Configure system preferences and user settings</p>
+        <p className="text-sm sm:text-base text-gray-600">Configure system preferences and user settings</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
         {/* Settings Navigation */}
-        <div className="lg:col-span-1">
+        <div className="xl:col-span-1">
           <div className="bg-white rounded-lg border border-gray-200 p-4">
             <nav className="space-y-2">
               {sections.map((section) => (
@@ -195,7 +195,7 @@ const SettingsView = () => {
                   }`}
                 >
                   <section.icon className="h-5 w-5" />
-                  <span className="text-sm font-medium">{section.name}</span>
+                  <span className="text-xs sm:text-sm font-medium">{section.name}</span>
                 </button>
               ))}
             </nav>
@@ -203,8 +203,8 @@ const SettingsView = () => {
         </div>
 
         {/* Settings Content */}
-        <div className="lg:col-span-3">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="xl:col-span-3">
+          <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6">
             {renderContent()}
           </div>
         </div>

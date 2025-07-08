@@ -157,81 +157,81 @@ const AlertsView = () => {
               <p className="text-sm text-gray-600">Active Alerts</p>
               <p className="text-2xl font-bold text-red-600">{activeAlerts}</p>
             </div>
-            <AlertTriangle className="h-8 w-8 text-red-500" />
+            <AlertTriangle className="h-6 w-6 sm:h-8 sm:w-8 text-red-500" />
           </div>
         </div>
         <div className="bg-white p-4 rounded-lg border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Critical</p>
-              <p className="text-2xl font-bold text-red-600">{criticalAlerts}</p>
+              <p className="text-xs sm:text-sm text-gray-600">Critical</p>
+              <p className="text-xl sm:text-2xl font-bold text-red-600">{criticalAlerts}</p>
             </div>
-            <AlertTriangle className="h-8 w-8 text-red-600" />
+            <AlertTriangle className="h-6 w-6 sm:h-8 sm:w-8 text-red-600" />
           </div>
         </div>
         <div className="bg-white p-4 rounded-lg border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Resolved Today</p>
-              <p className="text-2xl font-bold text-green-600">
+              <p className="text-xs sm:text-sm text-gray-600">Resolved Today</p>
+              <p className="text-xl sm:text-2xl font-bold text-green-600">
                 {alerts.filter(alert => alert.status === 'resolved').length}
               </p>
             </div>
-            <CheckCircle className="h-8 w-8 text-green-500" />
-          </div>
+            <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />
+          <p className="text-sm sm:text-base text-gray-600">Monitor and manage production alerts and notifications</p>
         </div>
       </div>
 
       {/* Alerts List */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-        <div className="p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Alerts</h3>
+        <div className="p-4 sm:p-6">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Recent Alerts</h3>
           <div className="space-y-4">
             {alerts.map((alert) => (
               <div 
                 key={alert.id} 
-                className={`p-4 rounded-lg border-2 ${getAlertColor(alert.type, alert.status)} transition-all hover:shadow-md`}
+                className={`p-3 sm:p-4 rounded-lg border-2 ${getAlertColor(alert.type, alert.status)} transition-all hover:shadow-md`}
               >
-                <div className="flex items-start justify-between">
+                <div className="flex flex-col lg:flex-row lg:items-start justify-between space-y-3 lg:space-y-0">
                   <div className="flex items-start space-x-3">
                     {getAlertIcon(alert.type)}
                     <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <h4 className="font-medium text-gray-900">{alert.title}</h4>
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 mb-1">
+                        <h4 className="text-sm sm:text-base font-medium text-gray-900">{alert.title}</h4>
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(alert.priority)}`}>
                           {alert.priority}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-600 mb-2">{alert.description}</p>
-                      <div className="flex items-center space-x-4 text-xs text-gray-500">
+                      <p className="text-xs sm:text-sm text-gray-600 mb-2">{alert.description}</p>
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-4 text-xs text-gray-500">
                         <span>Machine: {alert.machine}</span>
                         <span>Time: {alert.timestamp}</span>
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(alert.status)}`}>
                       {alert.status}
                     </span>
                     {alert.status === 'active' && (
-                      <div className="flex space-x-1">
+                      <div className="flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-1">
                         <button className="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition-colors">
                           Acknowledge
                         </button>
                         <button className="px-3 py-1 bg-green-600 text-white text-xs rounded hover:bg-green-700 transition-colors">
-                          Resolve
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                         </button>
                       </div>
                     )}
-                  </div>
-                </div>
+              <p className="text-xs sm:text-sm text-gray-600">Total Alerts</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900">{alerts.length}</p>
               </div>
-            ))}
+            <Bell className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500" />
           </div>
         </div>
       </div>
     </div>
   );
-};
-
+              <p className="text-xs sm:text-sm text-gray-600">Active Alerts</p>
+              <p className="text-xl sm:text-2xl font-bold text-red-600">{activeAlerts}</p>
 export default AlertsView;

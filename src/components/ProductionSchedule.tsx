@@ -91,15 +91,15 @@ const ProductionSchedule = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Today's Production Schedule</h3>
+    <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200">
+      <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Today's Production Schedule</h3>
       <div className="space-y-4">
         {scheduleData.map((item) => (
-          <div key={item.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-3">
+          <div key={item.id} className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 space-y-2 sm:space-y-0">
               <div className="flex items-center space-x-3">
                 {getStatusIcon(item.status)}
-                <h4 className="font-medium text-gray-900">{item.orderNo}</h4>
+                <h4 className="text-sm sm:text-base font-medium text-gray-900">{item.orderNo}</h4>
                 <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(item.priority)}`}>
                   {item.priority}
                 </span>
@@ -109,22 +109,22 @@ const ProductionSchedule = () => {
               </span>
             </div>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mb-3">
               <div>
                 <p className="text-xs text-gray-500">Product</p>
-                <p className="text-sm font-medium">{item.product}</p>
+                <p className="text-xs sm:text-sm font-medium">{item.product}</p>
               </div>
               <div>
                 <p className="text-xs text-gray-500">Machine</p>
-                <p className="text-sm font-medium">{item.machine}</p>
+                <p className="text-xs sm:text-sm font-medium">{item.machine}</p>
               </div>
               <div>
                 <p className="text-xs text-gray-500">Time</p>
-                <p className="text-sm font-medium">{item.startTime} - {item.endTime}</p>
+                <p className="text-xs sm:text-sm font-medium">{item.startTime} - {item.endTime}</p>
               </div>
               <div>
                 <p className="text-xs text-gray-500">Duration</p>
-                <p className="text-sm font-medium">{item.duration}</p>
+                <p className="text-xs sm:text-sm font-medium">{item.duration}</p>
               </div>
             </div>
             

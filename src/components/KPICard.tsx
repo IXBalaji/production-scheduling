@@ -61,17 +61,17 @@ const KPICard: React.FC<KPICardProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200 hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-gray-600">{title}</p>
-          <p className="text-2xl font-bold text-gray-900 mt-1">{getValue()}</p>
-          <p className={`text-sm mt-1 ${changeColor[changeType]}`}>
+          <p className="text-xs sm:text-sm font-medium text-gray-600">{title}</p>
+          <p className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">{getValue()}</p>
+          <p className={`text-xs sm:text-sm mt-1 ${changeColor[changeType]}`}>
             {getChange()}
           </p>
         </div>
-        <div className={`p-3 rounded-lg ${color}`}>
-          <Icon className="h-6 w-6 text-white" />
+        <div className={`p-2 sm:p-3 rounded-lg ${color}`}>
+          <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
         </div>
       </div>
     </div>

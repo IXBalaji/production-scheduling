@@ -78,40 +78,40 @@ const AnalyticsView = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Production Analytics</h1>
-        <p className="text-gray-600">Comprehensive performance metrics and insights</p>
+        <p className="text-sm sm:text-base text-gray-600">Comprehensive performance metrics and insights</p>
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {kpis.map((kpi, index) => (
-          <div key={index} className="bg-white p-6 rounded-lg border border-gray-200">
+          <div key={index} className="bg-white p-4 sm:p-6 rounded-lg border border-gray-200">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">{kpi.title}</p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{kpi.value}</p>
+                <p className="text-xs sm:text-sm text-gray-600">{kpi.title}</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900 mt-1">{kpi.value}</p>
                 <div className="flex items-center mt-2">
                   {kpi.trend === 'up' ? (
                     <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
                   ) : (
                     <TrendingDown className="h-4 w-4 text-red-500 mr-1" />
                   )}
-                  <span className={`text-sm ${kpi.trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
+                  <span className={`text-xs sm:text-sm ${kpi.trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
                     {kpi.change}
                   </span>
                 </div>
               </div>
-              <BarChart3 className="h-8 w-8 text-blue-500" />
+              <BarChart3 className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500" />
             </div>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {/* Production Trends */}
-        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+        <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900">Production Trends</h3>
-            <div className="flex items-center space-x-4">
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900">Production Trends</h3>
+            <div className="hidden sm:flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
                 <span className="text-sm text-gray-600">Planned</span>
@@ -123,25 +123,25 @@ const AnalyticsView = () => {
             </div>
           </div>
           
-          <div className="relative h-64">
+          <div className="relative h-48 sm:h-64">
             <div className="absolute inset-0 flex items-end justify-between space-x-2">
               {productionData.map((data, index) => (
                 <div key={index} className="flex-1 flex flex-col items-center">
                   <div className="w-full flex justify-center space-x-1">
-                    <div className="w-4 bg-gray-200 rounded-t">
+                    <div className="w-2 sm:w-4 bg-gray-200 rounded-t">
                       <div 
                         className="bg-blue-500 rounded-t transition-all duration-300"
-                        style={{ height: `${(data.planned / maxProduction) * 200}px` }}
+                        style={{ height: `${(data.planned / maxProduction) * 150}px` }}
                       ></div>
                     </div>
-                    <div className="w-4 bg-gray-200 rounded-t">
+                    <div className="w-2 sm:w-4 bg-gray-200 rounded-t">
                       <div 
                         className="bg-green-500 rounded-t transition-all duration-300"
-                        style={{ height: `${(data.actual / maxProduction) * 200}px` }}
+                        style={{ height: `${(data.actual / maxProduction) * 150}px` }}
                       ></div>
                     </div>
                   </div>
-                  <span className="text-xs text-gray-500 mt-2">{data.month}</span>
+                  <span className="text-xs text-gray-500 mt-2 hidden sm:block">{data.month}</span>
                 </div>
               ))}
             </div>
@@ -149,12 +149,12 @@ const AnalyticsView = () => {
         </div>
 
         {/* Machine Utilization */}
-        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Machine Utilization</h3>
+        <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Machine Utilization</h3>
           <div className="space-y-4">
             {machineUtilization.map((machine, index) => (
               <div key={index} className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700">{machine.machine}</span>
+                <span className="text-xs sm:text-sm font-medium text-gray-700">{machine.machine}</span>
                 <div className="flex items-center space-x-2 flex-1 ml-4">
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div 
@@ -165,7 +165,7 @@ const AnalyticsView = () => {
                       style={{ width: `${machine.utilization}%` }}
                     ></div>
                   </div>
-                  <span className="text-sm font-medium text-gray-600 w-12">{machine.utilization}%</span>
+                  <span className="text-xs sm:text-sm font-medium text-gray-600 w-8 sm:w-12">{machine.utilization}%</span>
                 </div>
               </div>
             ))}
@@ -174,17 +174,17 @@ const AnalyticsView = () => {
       </div>
 
       {/* Quality Metrics */}
-      <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+      <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">Quality Metrics</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900">Quality Metrics</h3>
           <PieChart className="h-5 w-5 text-gray-400" />
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {qualityMetrics.map((metric, index) => (
             <div key={index} className="text-center">
-              <div className="relative w-24 h-24 mx-auto mb-3">
-                <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 36 36">
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-3">
+                <svg className="w-20 h-20 sm:w-24 sm:h-24 transform -rotate-90" viewBox="0 0 36 36">
                   <path
                     className="text-gray-200"
                     stroke="currentColor"
@@ -203,11 +203,11 @@ const AnalyticsView = () => {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-lg font-bold text-gray-900">{metric.percentage}%</span>
+                  <span className="text-sm sm:text-lg font-bold text-gray-900">{metric.percentage}%</span>
                 </div>
               </div>
-              <h4 className="font-medium text-gray-900">{metric.category}</h4>
-              <p className="text-sm text-gray-600">{metric.count} units</p>
+              <h4 className="text-sm sm:text-base font-medium text-gray-900">{metric.category}</h4>
+              <p className="text-xs sm:text-sm text-gray-600">{metric.count} units</p>
             </div>
           ))}
         </div>

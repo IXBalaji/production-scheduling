@@ -39,31 +39,31 @@ const AIInsights = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+    <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200">
       <div className="flex items-center space-x-2 mb-4">
         <Brain className="h-5 w-5 text-purple-600" />
-        <h3 className="text-lg font-semibold text-gray-900">AI Insights & Recommendations</h3>
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900">AI Insights & Recommendations</h3>
       </div>
       
       <div className="space-y-4">
         {insights.map((insight) => (
-          <div key={insight.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-            <div className="flex items-start justify-between mb-2">
+          <div key={insight.id} className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-2 space-y-2 sm:space-y-0">
               <div className="flex items-center space-x-2">
                 {React.createElement(getIcon(insight.icon), { className: "h-4 w-4 text-blue-600" })}
-                <h4 className="font-medium text-gray-900">{insight.title}</h4>
+                <h4 className="text-sm sm:text-base font-medium text-gray-900">{insight.title}</h4>
               </div>
               <span className={`px-2 py-1 rounded-full text-xs font-medium ${getImpactColor(insight.impact)}`}>
                 {insight.impact}
               </span>
             </div>
             
-            <p className="text-sm text-gray-600 mb-3">{insight.description}</p>
+            <p className="text-xs sm:text-sm text-gray-600 mb-3">{insight.description}</p>
             
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
               <div className="flex items-center space-x-2">
                 <span className="text-xs text-gray-500">Confidence:</span>
-                <div className="w-16 bg-gray-200 rounded-full h-2">
+                <div className="w-12 sm:w-16 bg-gray-200 rounded-full h-2">
                   <div 
                     className={`h-2 rounded-full ${getConfidenceColor(insight.confidence)}`}
                     style={{ width: `${insight.confidence}%` }}
@@ -72,7 +72,7 @@ const AIInsights = () => {
                 <span className="text-xs font-medium">{insight.confidence}%</span>
               </div>
               
-              <button className="text-sm text-blue-600 hover:text-blue-800 font-medium">
+              <button className="text-xs sm:text-sm text-blue-600 hover:text-blue-800 font-medium">
                 Apply
               </button>
             </div>

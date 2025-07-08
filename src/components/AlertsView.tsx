@@ -178,7 +178,7 @@ const AlertsView = () => {
               </p>
             </div>
             <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />
-          <p className="text-sm sm:text-base text-gray-600">Monitor and manage production alerts and notifications</p>
+          </div>
         </div>
       </div>
 
@@ -219,25 +219,19 @@ const AlertsView = () => {
                           Acknowledge
                         </button>
                         <button className="px-3 py-1 bg-green-600 text-white text-xs rounded hover:bg-green-700 transition-colors">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                          Resolve
                         </button>
                       </div>
                     )}
-              <p className="text-xs sm:text-sm text-gray-600">Total Alerts</p>
-              <p className="text-xl sm:text-2xl font-bold text-gray-900">{alerts.length}</p>
+                  </div>
+                </div>
               </div>
-              )
-              }
-            <Bell className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500" />
+            ))}
           </div>
         </div>
       </div>
-    )
-    )
-    }
     </div>
   );
-              <p className="text-xs sm:text-sm text-gray-600">Active Alerts</p>
-              <p className="text-xl sm:text-2xl font-bold text-red-600">{activeAlerts}</p>
-}
+};
+
 export default AlertsView;

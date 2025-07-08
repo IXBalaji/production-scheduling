@@ -110,14 +110,12 @@ function App() {
               <div>
                 <ProductionSchedule />
               </div>
-              <div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <TimeSeriesChart />
+                <div>
+                  <MachineStatus />
+                </div>
               </div>
-            </div>
-
-            {/* Machine Status */}
-            <div className="mb-6">
-              <MachineStatus />
             </div>
 
             {/* AI Insights */}

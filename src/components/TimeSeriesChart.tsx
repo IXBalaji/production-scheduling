@@ -52,9 +52,9 @@ const TimeSeriesChart = () => {
     .reduce((sum, d) => sum + d.output, 0);
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200">
+    <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200 w-full overflow-hidden">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Production Trends & AI Predictions</h3>
+        <h3 className="text-sm sm:text-lg font-semibold text-gray-900 truncate mr-2">Production Trends & AI Predictions</h3>
         <div className="hidden sm:flex items-center space-x-4">
           <div className="flex items-center space-x-2">
             <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
@@ -67,10 +67,10 @@ const TimeSeriesChart = () => {
         </div>
       </div>
       
-      <div className="relative h-48 sm:h-64">
+      <div className="relative h-48 sm:h-64 w-full overflow-hidden">
         <div className="absolute inset-0 flex items-end justify-between space-x-2">
           {productionData.map((data, index) => (
-            <div key={index} className="flex-1 flex flex-col items-center">
+            <div key={index} className="flex-1 flex flex-col items-center min-w-0">
               <div className="w-full flex flex-col items-center space-y-1">
                 {/* Efficiency Bar */}
                 <div className={`w-2 sm:w-4 bg-gray-200 rounded-t ${data.isPrediction ? 'opacity-70' : ''}`}>
@@ -89,7 +89,7 @@ const TimeSeriesChart = () => {
                 </div>
               </div>
               
-              <span className={`text-xs mt-2 ${data.isPrediction ? 'text-purple-500 font-medium' : 'text-gray-500'} ${index % 2 === 0 || window.innerWidth >= 640 ? '' : 'hidden'}`}>
+              <span className={`text-xs mt-2 truncate ${data.isPrediction ? 'text-purple-500 font-medium' : 'text-gray-500'} ${index % 4 === 0 ? '' : 'hidden sm:block'}`}>
                 {data.hour}
               </span>
             </div>

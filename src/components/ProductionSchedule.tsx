@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Clock, CheckCircle, AlertCircle, Play, Calendar, List } from 'lucide-react';
 import CalendarView from './CalendarView';
+import ProductionCalendarView from './ProductionCalendarView';
 
 const ProductionSchedule = () => {
-  const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list');
+  const [viewMode, setViewMode] = useState<'list' | 'calendar' | 'timeline'>('timeline');
 
   // Enhanced schedule data with proper datetime objects
   const scheduleData = [
@@ -194,10 +195,21 @@ const ProductionSchedule = () => {
         <h3 className="text-base sm:text-lg font-semibold text-gray-900">Production Schedule</h3>
         
         {/* View Mode Toggle */}
-        <div className="flex space-x-1 bg-gray-100 rounded-lg p-1">
+        <div className="flex space-x-1 bg-gray-100 rounded-lg p-1 overflow-x-auto">
+          <button
+            onClick={() => setViewMode('timeline')}
+            className={`px-3 py-1 text-sm rounded-md transition-colors flex items-center space-x-1 whitespace-nowrap ${
+              viewMode === 'timeline'
+                ? 'bg-white text-gray-900 shadow-sm'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <Calendar className="h-4 w-4" />
+            <span>Timeline</span>
+          </button>
           <button
             onClick={() => setViewMode('list')}
-            className={`px-3 py-1 text-sm rounded-md transition-colors flex items-center space-x-1 ${
+            className={`px-3 py-1 text-sm rounded-md transition-colors flex items-center space-x-1 whitespace-nowrap ${
               viewMode === 'list'
                 ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-600 hover:text-gray-900'
@@ -208,7 +220,7 @@ const ProductionSchedule = () => {
           </button>
           <button
             onClick={() => setViewMode('calendar')}
-            className={`px-3 py-1 text-sm rounded-md transition-colors flex items-center space-x-1 ${
+            className={`px-3 py-1 text-sm rounded-md transition-colors flex items-center space-x-1 whitespace-nowrap ${
               viewMode === 'calendar'
                 ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-600 hover:text-gray-900'
@@ -221,6 +233,7 @@ const ProductionSchedule = () => {
       </div>
 
       <div className="flex-1 overflow-hidden">
+        {viewMode === 'timeline' && <ProductionCalendarView />}
         {viewMode === 'list' ? renderListView() : <CalendarView scheduleData={scheduleData} />}
       </div>
     </div>

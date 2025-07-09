@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Calendar, Clock, Play, CheckCircle, AlertCircle } from 'lucide-react';
+import ProductionCalendarView from './ProductionCalendarView';
 
 interface ScheduleItem {
   id: number;
@@ -19,7 +20,7 @@ interface CalendarViewProps {
 
 const CalendarView: React.FC<CalendarViewProps> = ({ scheduleData }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [viewType, setViewType] = useState<'day' | 'month' | 'year'>('day');
+  const [viewType, setViewType] = useState<'day' | 'month' | 'year' | 'timeline'>('timeline');
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -328,7 +329,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ scheduleData }) => {
 
         {/* View Type Selector */}
         <div className="flex space-x-1 bg-gray-100 rounded-lg p-1">
-          {(['day', 'month', 'year'] as const).map(view => (
+          {(['timeline', 'day', 'month', 'year'] as const).map(view => (
             <button
               key={view}
               onClick={() => setViewType(view)}
@@ -346,6 +347,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ scheduleData }) => {
 
       {/* Calendar Content */}
       <div className="flex-1 p-4">
+        {viewType === 'timeline' && <ProductionCalendarView />}
         {viewType === 'day' && renderDayView()}
         {viewType === 'month' && renderMonthView()}
         {viewType === 'year' && renderYearView()}

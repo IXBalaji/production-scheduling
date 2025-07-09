@@ -273,7 +273,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ scheduleData }) => {
                     <div className="text-xs text-gray-500 font-medium">
                       +{dayItems.length - 3} more
                     </div>
-                  ))}
+                  )}
                   {dayItems.length === 0 && isCurrentMonth && (
                     <div className="text-xs text-gray-400 border border-dashed border-gray-300 rounded p-1 text-center hover:border-blue-300 hover:text-blue-500 transition-colors">
                       <Plus className="h-3 w-3 mx-auto" />
@@ -480,134 +480,6 @@ const CalendarView: React.FC<CalendarViewProps> = ({ scheduleData }) => {
 
       {/* Content */}
       <div className="flex-1 overflow-hidden">
-        {viewType === 'timeline' && <ProductionCalendarView />}
-        {viewType === 'day' && renderDayView()}
-        {viewType === 'month' && renderMonthView()}
-        {viewType === 'year' && renderYearView()}
-      </div>
-
-      {/* Legend */}
-      <div className="p-4 border-t border-gray-200">
-        <div className="flex flex-wrap items-center gap-4 text-xs">
-          <div className="flex items-center space-x-2">
-            <span className="font-medium text-gray-700">Status:</span>
-            <div className="flex items-center space-x-1">
-              <Play className="h-3 w-3 text-green-500" />
-              <span>Running</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Clock className="h-3 w-3 text-blue-500" />
-              <span>Scheduled</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <CheckCircle className="h-3 w-3 text-green-500" />
-              <span>Completed</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <AlertCircle className="h-3 w-3 text-red-500" />
-              <span>Delayed</span>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2">
-            <span className="font-medium text-gray-700">Priority:</span>
-            <div className="flex items-center space-x-1">
-              <div className="w-2 h-2 rounded-full bg-red-500"></div>
-              <span>High</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
-              <span>Medium</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-2 h-2 rounded-full bg-green-500"></div>
-              <span>Low</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default CalendarView;
-                  {monthDate.toLocaleDateString('en-US', { month: 'long' })}
-                </h4>
-                <div className="space-y-1">
-                  {monthItems.slice(0, 5).map(item => (
-                    <div
-                      key={item.id}
-                      className={`p-1 rounded text-xs ${getStatusColor(item.status)}`}
-                    >
-                      <div className="flex items-center space-x-1">
-                        <div className={`w-1 h-1 rounded-full ${getPriorityColor(item.priority)}`}></div>
-                        <span className="truncate">{item.orderNo}</span>
-                        <span className="text-xs">({formatDate(item.startDateTime)})</span>
-                      </div>
-                    </div>
-                  ))}
-                  {monthItems.length > 5 && (
-                    <div className="text-xs text-gray-500">+{monthItems.length - 5} more</div>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  };
-
-  return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 h-full flex flex-col">
-      {/* Calendar Header */}
-      <div className="p-4 border-b border-gray-200">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={() => navigateDate('prev')}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <h3 className="text-lg font-semibold text-gray-900">{getDateTitle()}</h3>
-            <button
-              onClick={() => navigateDate('next')}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </div>
-          
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={() => setCurrentDate(new Date())}
-              className="px-3 py-1 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Today
-            </button>
-          </div>
-        </div>
-
-        {/* View Type Selector */}
-        <div className="flex space-x-1 bg-gray-100 rounded-lg p-1">
-          {(['timeline', 'day', 'month', 'year'] as const).map(view => (
-            <button
-              key={view}
-              onClick={() => setViewType(view)}
-              className={`px-3 py-1 text-sm rounded-md transition-colors ${
-                viewType === view
-                  ? 'bg-white text-gray-900 shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              {view.charAt(0).toUpperCase() + view.slice(1)}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Calendar Content */}
-      <div className="flex-1 p-4">
         {viewType === 'timeline' && <ProductionCalendarView />}
         {viewType === 'day' && renderDayView()}
         {viewType === 'month' && renderMonthView()}

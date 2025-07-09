@@ -297,27 +297,23 @@ const ProductionCalendarView = () => {
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 h-full flex flex-col">
       {/* Header */}
       <div className="p-4 sm:p-6 border-b border-gray-200">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between space-y-4 lg:space-y-0">
-          <div className="flex items-center space-x-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
             <button
               onClick={() => navigateDate('prev')}
               className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
-            <div>
-              <h2 className="text-xl font-bold text-gray-900">{formatDate(currentDate)}</h2>
-              <p className="text-sm text-gray-600">Production Schedule</p>
-            </div>
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900">{formatDate(currentDate)}</h2>
             <button
               onClick={() => navigateDate('next')}
               className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
-          </div>
-
-          <div className="flex items-center space-x-2">
+            
+            {/* Buttons moved next to date */}
             <button className="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
               <Search className="h-4 w-4" />
               <span className="hidden sm:inline">Search</span>
@@ -332,10 +328,14 @@ const ProductionCalendarView = () => {
             </button>
             <button
               onClick={() => setCurrentDate(new Date())}
-              className="px-3 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+              className="px-3 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
             >
               TODAY
             </button>
+          </div>
+          
+          <div className="text-sm text-gray-600">
+            Production Schedule
           </div>
         </div>
       </div>

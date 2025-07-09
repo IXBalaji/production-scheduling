@@ -296,31 +296,232 @@ const ProductionCalendarView = () => {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 h-full flex flex-col">
       {/* Header */}
-      <div className="p-4 sm:p-6 border-b border-gray-200">
+      <div className="p-3 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1">
             <button
               onClick={() => navigateDate('prev')}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-1.5 hover:bg-white hover:shadow-sm rounded-md transition-all duration-200"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-4 w-4 text-gray-600" />
             </button>
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900">{formatDate(currentDate)}</h2>
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900 px-2">{formatDate(currentDate)}</h2>
             <button
               onClick={() => navigateDate('next')}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-1.5 hover:bg-white hover:shadow-sm rounded-md transition-all duration-200"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-4 w-4 text-gray-600" />
             </button>
             
             {/* Buttons moved next to date */}
-            <button className="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
-              <Search className="h-4 w-4" />
-              <span className="hidden sm:inline">Search</span>
+            <div className="flex items-center space-x-1 ml-4">
+              <button className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-white text-gray-600 rounded-md hover:bg-gray-50 hover:shadow-sm transition-all duration-200 border border-gray-200">
+                <Search className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline text-sm">Search</span>
+              </button>
+              <button className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-white text-gray-600 rounded-md hover:bg-gray-50 hover:shadow-sm transition-all duration-200 border border-gray-200">
+                <Filter className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline text-sm">Filter</span>
+              </button>
+              <button className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-blue-500 text-white rounded-md hover:bg-blue-600 hover:shadow-md transition-all duration-200">
+                <Plus className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline text-sm font-medium">Add</span>
+              </button>
+              <button
+                onClick={() => setCurrentDate(new Date())}
+                className="px-2.5 py-1.5 bg-gray-800 text-white rounded-md hover:bg-gray-900 hover:shadow-md transition-all duration-200 text-sm font-medium"
+              >
+                TODAY
+              </button>
+            </div>
+          </div>
+          
+          <div className="text-xs text-gray-500 bg-white px-2 py-1 rounded-md border border-gray-200">
+            Production Schedule
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Stats Bar */}
+      <div className="px-3 py-2 bg-gray-50 border-b border-gray-200">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4 text-xs">
+            <div className="flex items-center space-x-1">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span className="text-gray-600">
+                {scheduleItems.filter(item => item.status === 'running').length} Running
+              </span>
             </button>
-            <button className="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
-              <Filter className="h-4 w-4" />
-              <span className="hidden sm:inline">Filter</span>
+            <div className="flex items-center space-x-1">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span className="text-gray-600">
+                {scheduleItems.filter(item => item.status === 'scheduled').length} Scheduled
+              </span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+              <span className="text-gray-600">
+                {scheduleItems.filter(item => item.status === 'delayed').length} Delayed
+              </span>
+            </div>
+          </div>
+          <div className="text-xs text-gray-500">
+            {scheduleItems.length} total work orders
+          </div>
+        </div>
+      </div>
+
+      {/* Calendar Grid */}
+      <div className="flex-1 overflow-auto bg-gray-50">
+        <div className="min-w-[1200px]">
+          {/* Time Header */}
+          <div className="sticky top-0 bg-white border-b border-gray-300 z-10 shadow-sm">
+            <div className="flex">
+              <div className="w-44 p-2.5 border-r border-gray-300 bg-gradient-to-r from-gray-100 to-gray-50">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-gray-700">Work Centers</span>
+                  <span className="text-xs text-gray-500">Cap</span>
+                </div>
+              </div>
+              <div className="flex-1 flex">
+                {timeSlots.map((timeSlot, index) => (
+                  <div
+                    key={timeSlot}
+                    className={`w-14 p-1.5 text-center border-r border-gray-200 ${
+                      index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                    } hover:bg-blue-50 transition-colors`}
+                  >
+                    <span className="text-xs font-medium text-gray-600">
+                      {timeSlot}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Work Center Rows */}
+          <div className="divide-y divide-gray-200">
+            {workCenters.map((workCenter, wcIndex) => {
+              const items = getItemsForWorkCenter(workCenter.id);
+              const isDragOver = dragOverWorkCenter === workCenter.id;
+              const utilization = Math.min(100, (items.length / (workCenter.capacity / 10)) * 100);
+              
+              return (
+                <div 
+                  key={workCenter.id} 
+                  className={`flex hover:bg-blue-50/30 transition-all duration-200 ${
+                    isDragOver ? 'bg-blue-100 border-blue-300 shadow-inner' : ''
+                  } ${wcIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}
+                  onDragOver={handleDragOver}
+                  onDragEnter={(e) => handleDragEnter(e, workCenter.id)}
+                  onDragLeave={handleDragLeave}
+                  onDrop={(e) => handleDrop(e, workCenter.id)}
+                >
+                  {/* Work Center Info */}
+                  <div className="w-44 p-2.5 border-r border-gray-200 bg-white/80 backdrop-blur-sm">
+                    <div className="flex flex-col space-y-1">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-semibold text-gray-900 truncate">
+                          {workCenter.name.replace(' 00', ' ')}
+                        </span>
+                        <span className="text-xs text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">
+                          {workCenter.capacity}
+                        </span>
+                      </div>
+                      <span className="text-xs text-gray-500">{workCenter.type}</span>
+                      
+                      {/* Utilization Bar */}
+                      <div className="flex items-center space-x-1">
+                        <div className="flex-1 bg-gray-200 rounded-full h-1">
+                          <div 
+                            className={`h-1 rounded-full transition-all duration-300 ${
+                              utilization > 80 ? 'bg-red-500' : 
+                              utilization > 60 ? 'bg-yellow-500' : 'bg-green-500'
+                            }`}
+                            style={{ width: `${utilization}%` }}
+                          />
+                        </div>
+                        <span className="text-xs text-gray-500 font-medium">
+                          {utilization.toFixed(0)}%
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Time Slots */}
+                  <div className="flex-1 relative h-16 min-h-[64px]">
+                    {/* Time Slot Grid */}
+                    <div className="absolute inset-0 flex">
+                      {timeSlots.map((timeSlot, index) => (
+                        <div
+                          key={timeSlot}
+                          className={`w-14 h-full border-r border-gray-100 cursor-pointer hover:bg-blue-100/50 transition-all duration-200 ${
+                            index % 2 === 0 ? 'bg-gray-50/30' : 'bg-white/30'
+                          }`}
+                          onClick={() => handleTimeSlotClick(timeSlot, workCenter.id)}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Schedule Items */}
+                    <div className="absolute inset-0 p-0.5">
+                      {items.map((item, itemIndex) => {
+                        const position = calculateTimeSlotPosition(item.startTime, item.endTime);
+                        
+                        return (
+                          <div
+                            key={item.id}
+                            className={`absolute ${item.color} text-white rounded-md shadow-sm border border-white/20 cursor-pointer hover:shadow-lg hover:scale-105 transition-all duration-200 group ${
+                              draggedItem?.id === item.id ? 'opacity-50 scale-95' : ''
+                            }`}
+                            style={{
+                              left: `${position.left}px`,
+                              width: `${Math.max(position.width, 70)}px`,
+                              top: `${itemIndex * 18 + 2}px`,
+                              height: '16px',
+                              zIndex: 10
+                            }}
+                            draggable
+                            onDragStart={(e) => handleDragStart(e, item)}
+                            onDragEnd={handleDragEnd}
+                            onClick={() => handleWorkOrderClick(item)}
+                          >
+                            <div className="flex items-center justify-between h-full px-1.5">
+                              <div className="flex items-center space-x-1 min-w-0">
+                                <div className="w-1 h-1 bg-white/80 rounded-full"></div>
+                                <span className="text-xs font-medium truncate">
+                                  {item.orderNo}
+                                </span>
+                              </div>
+                              <span className="text-xs opacity-90 ml-1 hidden group-hover:inline">
+                                {item.startTime.slice(0, 2)}h
+                              </span>
+                            </div>
+                            
+                            {/* Progress Bar */}
+                            {item.progress > 0 && (
+                              <div className="absolute bottom-0 left-0 h-0.5 bg-black/20 w-full rounded-b-md">
+                                <div 
+                                  className="h-full bg-white/90 rounded-b-md transition-all duration-300"
+                                  style={{ width: `${item.progress}%` }}
+                                />
+                              </div>
+                            )}
+                            
+                            {/* Status Indicator */}
+                            <div className={`absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full border border-white ${
+                              item.status === 'running' ? 'bg-green-400' :
+                              item.status === 'delayed' ? 'bg-red-400' :
+                              item.status === 'completed' ? 'bg-green-600' : 'bg-blue-400'
+                            }`}></div>
+                          </div>
+                        );
+                      })}
+                      
+                      {/* Empty State */}
+                      {items.length === 0 && (
+                        <div className="absolute inset-0 flex items-center justify-center">
             </button>
             <button className="flex items-center space-x-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
               <Plus className="h-4 w-4" />
@@ -448,8 +649,9 @@ const ProductionCalendarView = () => {
                             {/* Progress Bar */}
                             {item.progress > 0 && (
                               <div className="absolute bottom-0 left-0 h-0.5 bg-white/30 w-full">
+                              <div className="absolute bottom-0 left-0 h-0.5 bg-black/20 w-full rounded-b-md">
                                 <div 
-                                  className="h-full bg-white/80"
+                                  className="h-full bg-white/90 rounded-b-md"
                                   style={{ width: `${item.progress}%` }}
                                 />
                               </div>
@@ -479,47 +681,47 @@ const ProductionCalendarView = () => {
       />
 
       {/* Legend */}
-      <div className="p-4 border-t border-gray-200 bg-gray-50">
-        <div className="flex flex-wrap items-center gap-6 text-xs">
+      <div className="p-2 border-t border-gray-200 bg-gradient-to-r from-gray-50 to-white">
+        <div className="flex flex-wrap items-center gap-4 text-xs">
           <div className="flex items-center space-x-4">
-            <span className="font-medium text-gray-700">Status:</span>
-            <div className="flex items-center space-x-1">
-              <Play className="h-3 w-3 text-blue-500" />
+            <span className="font-semibold text-gray-700">Status:</span>
+            <div className="flex items-center space-x-0.5">
+              <Play className="h-2.5 w-2.5 text-green-500" />
               <span>Running</span>
             </div>
-            <div className="flex items-center space-x-1">
-              <Clock className="h-3 w-3 text-gray-500" />
+            <div className="flex items-center space-x-0.5">
+              <Clock className="h-2.5 w-2.5 text-blue-500" />
               <span>Scheduled</span>
             </div>
-            <div className="flex items-center space-x-1">
-              <CheckCircle className="h-3 w-3 text-green-500" />
+            <div className="flex items-center space-x-0.5">
+              <CheckCircle className="h-2.5 w-2.5 text-emerald-500" />
               <span>Completed</span>
             </div>
-            <div className="flex items-center space-x-1">
-              <AlertCircle className="h-3 w-3 text-red-500" />
+            <div className="flex items-center space-x-0.5">
+              <AlertCircle className="h-2.5 w-2.5 text-red-500" />
               <span>Delayed</span>
             </div>
           </div>
           
           <div className="flex items-center space-x-4">
-            <span className="font-medium text-gray-700">Priority:</span>
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 rounded bg-red-500"></div>
+            <span className="font-semibold text-gray-700">Priority:</span>
+            <div className="flex items-center space-x-0.5">
+              <div className="w-2 h-2 rounded bg-red-500"></div>
               <span>High</span>
             </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 rounded bg-yellow-500"></div>
+            <div className="flex items-center space-x-0.5">
+              <div className="w-2 h-2 rounded bg-yellow-500"></div>
               <span>Medium</span>
             </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 rounded bg-green-500"></div>
+            <div className="flex items-center space-x-0.5">
+              <div className="w-2 h-2 rounded bg-green-500"></div>
               <span>Low</span>
             </div>
           </div>
         </div>
         
-        <div className="mt-2 text-xs text-gray-500">
-          <span className="font-medium">Tip:</span> Click on work order cards to edit, drag to move between work centers
+        <div className="mt-1 text-xs text-gray-500">
+          <span className="font-semibold">💡 Tip:</span> Click cards to edit • Drag to move between work centers • Hover time slots to add tasks
         </div>
       </div>
     </div>
